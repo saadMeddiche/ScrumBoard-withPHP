@@ -3,6 +3,7 @@
     $userName = "root";
     $password = "";
     $dataBase = "scrumboard";
+    $toDoCounter = 0;
 
     //make a connection to the Data Base
     $connection = mysqli_connect($serverName,$userName,$password,$dataBase);
@@ -13,5 +14,3 @@
     }else {
         //echo "Connection success";
     }
-?>    
-    

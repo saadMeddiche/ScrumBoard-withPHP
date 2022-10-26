@@ -47,7 +47,21 @@
 				<div class="mb-3">
 					<div class="bg-light rounded-1">
 						<div class="bg-dark p-1 rounded-top">
-							<h4 class="text-light fs-6 mb-0 ms-1">To do (<span id="to-do-tasks-count">0</span>)</h4>
+							<h4 class="text-light fs-6 mb-0 ms-1">To do (<span id="to-do-tasks-count"><?php
+
+																										require "connect.php";
+
+																										$requete = "SELECT * FROM `dataofthetasks`";
+																										$query = mysqli_query($connection, $requete);
+																										$toDoCounter = 0;
+																										while ($row = mysqli_fetch_assoc($query)) {
+
+																											if ($row['status'] == 1) {
+																												$toDoCounter++;
+																											}
+																										}
+																										echo "$toDoCounter";
+																										?></span>)</h4>
 						</div>
 						<div class="color" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
@@ -55,10 +69,14 @@
 							<?php
 
 							require "connect.php";
+
+
 							$requete = "SELECT * FROM `dataofthetasks`";
 							$query = mysqli_query($connection, $requete);
 							while ($row = mysqli_fetch_assoc($query)) {
+
 								if ($row['status'] == 1) {
+									$toDoCounter++;
 									echo '
 									<div class="d-flex flex-row bd-highlight mb-1 w-100 pt-0 px-0 border-0" style="background-color:white">
 										<div class="w-30">
@@ -110,7 +128,21 @@
 				<div class="mb-3">
 					<div class="bg-light rounded-1">
 						<div class="bg-dark p-1 rounded-top">
-							<h4 class="text-light fs-6 mb-0 ms-1"> In Progress (<span id="in-progress-tasks-count">0</span>)</h4>
+							<h4 class="text-light fs-6 mb-0 ms-1"> In Progress (<span id="in-progress-tasks-count"><?php
+
+																													require "connect.php";
+
+																													$requete = "SELECT * FROM `dataofthetasks`";
+																													$query = mysqli_query($connection, $requete);
+																													$inProgressCounter = 0;
+																													while ($row = mysqli_fetch_assoc($query)) {
+
+																														if ($row['status'] == 2) {
+																															$inProgressCounter++;
+																														}
+																													}
+																													echo "$inProgressCounter";
+																													?></span>)</h4>
 
 						</div>
 						<div class="color" id="in-progress-tasks">
@@ -177,7 +209,21 @@
 				<div class="mb-3">
 					<div class="bg-light rounded-1">
 						<div class="bg-dark p-1 rounded-top">
-							<h4 class="text-light fs-6 mb-0 ms-1">Done (<span id="done-tasks-count">0</span>)</h4>
+							<h4 class="text-light fs-6 mb-0 ms-1">Done (<span id="done-tasks-count"><?php
+
+																									require "connect.php";
+
+																									$requete = "SELECT * FROM `dataofthetasks`";
+																									$query = mysqli_query($connection, $requete);
+																									$doneCounter = 0;
+																									while ($row = mysqli_fetch_assoc($query)) {
+
+																										if ($row['status'] == 2) {
+																											$doneCounter++;
+																										}
+																									}
+																									echo "$doneCounter";
+																									?></span>)</h4>
 
 						</div>
 						<div class="color" id="done-tasks">
@@ -188,7 +234,7 @@
 							<?php
 
 							require "connect.php";
-							$requete = "SELECT * FROM `dataofthetasks`";
+							$$requete = "SELECT * FROM `dataofthetasks`";
 							$query = mysqli_query($connection, $requete);
 							while ($row = mysqli_fetch_assoc($query)) {
 								if ($row['status'] == 3) {
