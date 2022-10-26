@@ -39,7 +39,7 @@
 				</div>
 
 				<div class="">
-					<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-info "><i class="">+</i> Add Task</a>
+					<button onclick="addTask()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-info "><i class="">+</i> Add Task</a>
 				</div>
 			</div>
 
@@ -76,8 +76,9 @@
 							while ($row = mysqli_fetch_assoc($query)) {
 
 								if ($row['status'] == 1) {
-									$toDoCounter++;
+
 									echo '
+									<form method="post" action="insert.php">
 									<div class="d-flex flex-row bd-highlight mb-1 w-100 pt-0 px-0 border-0" style="background-color:white">
 										<div class="w-30">
 											<i class="text-sm-start mx-1">
@@ -99,25 +100,30 @@
 												</div>
 												<div class="">
 													<div class="">
-														<button  type="button" class="btn btn-danger mb-2 me-1" > 
-															<i>
-																<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-																<path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
-																</path>
-																</svg>
+													
+														<button  type="submit" href="delete.php?id=' . $row['id'] . '"  class="btn btn-danger mb-2 me-1" > 
+															<i href="delete.php?id=' . $row['id'] . '">
+																<a href="delete.php?id=' . $row['id'] . '">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+																	<path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
+																	</path>
+																	</svg>
+																</a>
 															</i>
 														</button>
-														<button  data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-success mb-2 ">Up
+														<button  data-bs-toggle="modal" data-bs-target="#" type="button"  class="btn btn-success mb-2 editBtn"> Up
 														</button>
+													
 													</div>
 													<div class="">
-														<button  onclick="moveTask2(${i})" type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
-														<button  onclick="moveTask(${i})" type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
+														<button   type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
+														<button   type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									</form>
 									';
 								}
 							}
@@ -161,7 +167,7 @@
 									<div class="d-flex flex-row bd-highlight mb-1 w-100 pt-0 px-0 border-0" style="background-color:white">
 										<div class="w-30">
 											<i class="text-sm-start mx-1">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(16, 239, 10, 1);transform: ;msFilter:;"><path d="M12 6a3.939 3.939 0 0 0-3.934 3.934h2C10.066 8.867 10.934 8 12 8s1.934.867 1.934 1.934c0 .598-.481 1.032-1.216 1.626a9.208 9.208 0 0 0-.691.599c-.998.997-1.027 2.056-1.027 2.174V15h2l-.001-.633c.001-.016.033-.386.441-.793.15-.15.339-.3.535-.458.779-.631 1.958-1.584 1.958-3.182A3.937 3.937 0 0 0 12 6zm-1 10h2v2h-2z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg>
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(16, 239, 10, 1);transform: scaleX(-1);msFilter:progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);"><path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"></path></svg>
 											</i>
 										</div>
 
@@ -179,15 +185,17 @@
 												</div>
 												<div class="">
 													<div class="">
-														<button  type="button" class="btn btn-danger mb-2 me-1" > 
-															<i>
-																<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-																<path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
-																</path>
-																</svg>
+														<button  type="button" href="delete.php?id=' . $row['id'] . '" class="btn btn-danger mb-2 me-1" > 
+															<i href="delete.php?id=' . $row['id'] . '">
+																<a href="delete.php?id=' . $row['id'] . '">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+																	<path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
+																	</path>
+																	</svg>
+																</a>
 															</i>
 														</button>
-														<button  data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-success mb-2 ">Up
+														<button  data-bs-toggle="modal" data-bs-target="#" type="button" class="btn btn-success mb-2 editBtn">Up
 														</button>
 													</div>
 													<div class="">
@@ -218,7 +226,7 @@
 																									$doneCounter = 0;
 																									while ($row = mysqli_fetch_assoc($query)) {
 
-																										if ($row['status'] == 2) {
+																										if ($row['status'] == 3) {
 																											$doneCounter++;
 																										}
 																									}
@@ -239,11 +247,12 @@
 							while ($row = mysqli_fetch_assoc($query)) {
 								if ($row['status'] == 3) {
 									echo '
+									
 									<div class="d-flex flex-row bd-highlight mb-1 w-100 pt-0 px-0 border-0" style="background-color:white">
 										<div class="w-30">
-											<i class="text-sm-start mx-1">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(16, 239, 10, 1);transform: ;msFilter:;"><path d="M12 6a3.939 3.939 0 0 0-3.934 3.934h2C10.066 8.867 10.934 8 12 8s1.934.867 1.934 1.934c0 .598-.481 1.032-1.216 1.626a9.208 9.208 0 0 0-.691.599c-.998.997-1.027 2.056-1.027 2.174V15h2l-.001-.633c.001-.016.033-.386.441-.793.15-.15.339-.3.535-.458.779-.631 1.958-1.584 1.958-3.182A3.937 3.937 0 0 0 12 6zm-1 10h2v2h-2z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg>
-											</i>
+										<i class="text-sm-start mx-1">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(16, 239, 10, 1);transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M9.999 13.587 7.7 11.292l-1.412 1.416 3.713 3.705 6.706-6.706-1.414-1.414z"></path></svg>
+										</i>
 										</div>
 
 										<div class="w-100">
@@ -260,25 +269,28 @@
 												</div>
 												<div class="">
 													<div class="">
-														<button  type="button" class="btn btn-danger mb-2 me-1" > 
-															<i>
-																<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-																<path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
-																</path>
-																</svg>
+														<button  type="button" href="delete.php?id=' . $row['id'] . '" class="btn btn-danger mb-2 me-1" > 
+															<i href="delete.php?id=' . $row['id'] . '">
+																<a href="delete.php?id=' . $row['id'] . '">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+																	<path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
+																	</path>
+																	</svg>
+																</a>
 															</i>
 														</button>
-														<button  data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-success mb-2 ">Up
+														<button  data-bs-toggle="modal" data-bs-target="#" type="button" class="btn btn-success mb-2 editBtn">Up
 														</button>
 													</div>
 													<div class="">
-														<button  onclick="moveTask2(${i})" type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
-														<button  onclick="moveTask(${i})" type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
+														<button   type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
+														<button   type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+									
 									';
 								}
 							}
@@ -370,8 +382,88 @@
 
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="cancelButton()">Cancel</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 						<button type="submit" class="btn btn-primary" id="saveButton" name="save" data-bs-dismiss="modal">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- ---------------------------------------------------------------------------------------- -->
+	<div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Update Task</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<form method="post" action="insert.php">
+					<div class="modal-body">
+						<!-- Contenu -->
+						<div>
+							<p class="mb-0 fw-bold">Title</p>
+						</div>
+						<!-- title -->
+						<div class="input-group mb-3">
+							<input id="title" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="title">
+						</div>
+						<!-- checks -->
+						<div>
+							<p class="mb-0 fw-bold">Type</p>
+						</div>
+						<div class="form-check ms-2">
+							<input class="form-check-input feature" type="radio" name="flexRadioDefault" id="Feature" value="Feature">
+							<label class="form-check-label" for="Feature">
+								Feature
+							</label>
+						</div>
+						<div class="form-check mb-2 ms-2">
+							<input class="form-check-input bug" type="radio" name="flexRadioDefault" id="Bug" value="Bug">
+							<label class="form-check-label" for="Bug">
+								Bug
+							</label>
+						</div>
+						<!-- select -->
+						<div>
+							<p class="mb-0 fw-bold">Priorety</p>
+						</div>
+						<!-- Priorety -->
+						<select id="Priorety" class="form-select" aria-label="Default select example" name="priorety">
+							<option id="Option" value="1">Low</option>
+							<option id="Option" value="2">Medium</option>
+							<option id="Option" value="3">High</option>
+						</select>
+
+						<div>
+							<p class="mb-0 mt-2 fw-bold">Status</p>
+						</div>
+						<select id="Status" class="form-select" aria-label="Default select example" name="status">
+							<option value="1">To do</option>
+							<option value="2">In progress</option>
+							<option value="3">Done</option>
+						</select>
+						<!-- date -->
+						<div>
+							<p class="mb-0 mt-2 fw-bold">Date</p>
+						</div>
+						<div class="well ">
+							<input type="date" class="span2  w-100 h-35px m-0" value="02-16-2012" id="dp1" name="date">
+						</div>
+						<!-- description -->
+						<div>
+							<p class="mb-0 mt-2 fw-bold">Descriptions</p>
+						</div>
+						<div class="mb-3">
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+						</div>
+
+					</div>
+
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary" id="saveButton" name="save" data-bs-dismiss="modal">test</button>
 					</div>
 				</form>
 			</div>
@@ -380,10 +472,16 @@
 
 
 
+
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>
 	<script src="assets/js/javascript.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 	<!-- ================== END core-js ================== -->
 
 
