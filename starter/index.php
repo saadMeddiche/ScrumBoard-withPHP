@@ -1,5 +1,6 @@
 <!-- https://boxicons.com/?query=check -->
 <!-- https://getbootstrap.com/docs/5.1/layout/grid/ -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +79,8 @@
 								if ($row['status'] == 1) {
 
 									echo '
-									<form method="post" action="insert.php">
+									
+									<input type="hidden" value="' . $row['id'] . '">
 									<div class="d-flex flex-row bd-highlight mb-1 w-100 pt-0 px-0 border-0" style="background-color:white">
 										<div class="w-30">
 											<i class="text-sm-start mx-1">
@@ -99,7 +101,7 @@
 													<span type="button" class="btn btn-secondary mb-2">' . $row['type'] . '</span>
 												</div>
 												<div class="">
-													<div class="">
+													<div class="d-flex gap-1">
 													
 														<button  type="submit" href="delete.php?id=' . $row['id'] . '"  class="btn btn-danger mb-2 me-1" > 
 															<i href="delete.php?id=' . $row['id'] . '">
@@ -111,8 +113,10 @@
 																</a>
 															</i>
 														</button>
-														<button  data-bs-toggle="modal" data-bs-target="#" type="button"  class="btn btn-success mb-2 editBtn"> Up
+														
+														<button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()"> <a href="update.php?id=' . $row['id'] . '"> Up </a>
 														</button>
+														
 													
 													</div>
 													<div class="">
@@ -123,11 +127,12 @@
 											</div>
 										</div>
 									</div>
-									</form>
+									
 									';
 								}
 							}
 							?>
+
 						</div>
 					</div>
 				</div>
@@ -195,7 +200,7 @@
 																</a>
 															</i>
 														</button>
-														<button  data-bs-toggle="modal" data-bs-target="#" type="button" class="btn btn-success mb-2 editBtn">Up
+														<button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()"> <a href="update.php?id=' . $row['id'] . '"> Up </a>
 														</button>
 													</div>
 													<div class="">
@@ -279,7 +284,7 @@
 																</a>
 															</i>
 														</button>
-														<button  data-bs-toggle="modal" data-bs-target="#" type="button" class="btn btn-success mb-2 editBtn">Up
+														<button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()"> <a href="update.php?id=' . $row['id'] . '"> Up </a>
 														</button>
 													</div>
 													<div class="">
@@ -316,7 +321,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Add task</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" onclick="cancelButton()" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<form method="post" action="insert.php">
 					<div class="modal-body">
@@ -333,13 +338,13 @@
 							<p class="mb-0 fw-bold">Type</p>
 						</div>
 						<div class="form-check ms-2">
-							<input class="form-check-input feature" type="radio" name="flexRadioDefault" id="Feature" value="Feature">
+							<input class="form-check-input feature" type="radio" name="flexRadioDefault" id="Feature" value="1">
 							<label class="form-check-label" for="Feature">
 								Feature
 							</label>
 						</div>
 						<div class="form-check mb-2 ms-2">
-							<input class="form-check-input bug" type="radio" name="flexRadioDefault" id="Bug" value="Bug">
+							<input class="form-check-input bug" type="radio" name="flexRadioDefault" id="Bug" value="2">
 							<label class="form-check-label" for="Bug">
 								Bug
 							</label>
@@ -391,7 +396,7 @@
 	</div>
 
 	<!-- ---------------------------------------------------------------------------------------- -->
-	<div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -463,7 +468,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary" id="saveButton" name="save" data-bs-dismiss="modal">test</button>
+						<button type="submit" class="btn btn-primary" id="saveButton" name="save" data-bs-dismiss="modal">Update</button>
 					</div>
 				</form>
 			</div>
@@ -478,10 +483,6 @@
 	<script src="assets/js/app.min.js"></script>
 	<script src="assets/js/javascript.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
 	<!-- ================== END core-js ================== -->
 
 

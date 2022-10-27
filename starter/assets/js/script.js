@@ -1,5 +1,6 @@
-$(document).ready(function() {
- $(`.editBtn`).on(`click`, function(){
-    $(`#editmodal`).modal('show');
- });
-});
+
+function update() {
+    document.getElementById("test").click();
+}
+
+update();

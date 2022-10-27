@@ -10,7 +10,7 @@ $connection = mysqli_connect($serverName, $userName, $password, $dataBase);
 
 //test de connection
 if (!$connection) {
-    die("Connection has been failed" . mysqli_connect_error());
+    // die("Connection has been failed" . mysqli_connect_error());
 } else {
     //echo "Connection success";
 }
