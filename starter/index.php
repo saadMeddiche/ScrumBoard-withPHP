@@ -40,7 +40,7 @@
 				</div>
 
 				<div class="">
-					<button onclick="addTask()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-info "><i class="">+</i> Add Task</a>
+					<button onclick="addTask()" id="addTaskModalExemple" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-info "><i class="">+</i> Add Task</button>
 				</div>
 			</div>
 
@@ -52,16 +52,12 @@
 
 																										require "connect.php";
 
-																										$requete = "SELECT * FROM `dataofthetasks`";
+																										$requete = "SELECT COUNT(dataofthetasks.id) FROM dataofthetasks WHERE dataofthetasks.status = 1";
 																										$query = mysqli_query($connection, $requete);
-																										$toDoCounter = 0;
-																										while ($row = mysqli_fetch_assoc($query)) {
+																										//https://stackoverflow.com/questions/6907751/select-count-from-table-of-mysql-in-php
+																										$data = mysqli_fetch_assoc($query);
+																										echo $data['COUNT(dataofthetasks.id)'];
 
-																											if ($row['status'] == 1) {
-																												$toDoCounter++;
-																											}
-																										}
-																										echo "$toDoCounter";
 																										?></span>)</h4>
 						</div>
 						<div class="color" id="to-do-tasks">
@@ -114,8 +110,8 @@
 															</i>
 														</button>
 														
-														<button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()"> <a href="update.php?id=' . $row['id'] . '"> Up </a>
-														</button>
+														<a href="index.php?id=' . $row['id'] . '"> <button   href="index.php?id=' . $row['id'] . '"  type="button" class="btn btn-success mb-2" >  Up 
+														</button></a>
 														
 													
 													</div>
@@ -200,8 +196,8 @@
 																</a>
 															</i>
 														</button>
-														<button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()"> <a href="update.php?id=' . $row['id'] . '"> Up </a>
-														</button>
+														<a href="index.php?id=' . $row['id'] . '"> <button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" >  Up 
+														</button></a>
 													</div>
 													<div class="">
 														<button  onclick="moveTask2(${i})" type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
@@ -284,8 +280,8 @@
 																</a>
 															</i>
 														</button>
-														<button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()"> <a href="update.php?id=' . $row['id'] . '"> Up </a>
-														</button>
+														<a href="index.php?id=' . $row['id'] . '"><button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" onmouseover="myFunction()">  Up 
+														</button></a>
 													</div>
 													<div class="">
 														<button   type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
@@ -306,9 +302,9 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- END #content -->
-
-
+		<button type="hidden" data-bs-toggle="modal" data-bs-target="#update" id="updateBTN"></button>
 		<!-- BEGIN scroll-top-btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
 		<!-- END scroll-top-btn -->
@@ -396,14 +392,33 @@
 	</div>
 
 	<!-- ---------------------------------------------------------------------------------------- -->
-	<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<?php
+	require 'connect.php';
+	if (isset($_GET['id'])) {
+		$idGlob = $_GET['id'];
+		$requete = "SELECT * FROM dataofthetasks where id='$idGlob'";
+		$query = mysqli_query($connection, $requete);
+		$rows = mysqli_fetch_assoc($query);
+		$title = $rows['title'];
+		$type = $rows['type'];
+		$priorety = $rows['priorety'];
+		$status = $rows['status'];
+		$date = $rows['date'];
+		$description = $rows['description'];
+	}
+
+
+
+	?>
+	<div class="modal" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Update Task</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<form method="post" action="insert.php">
+				<form method="post" action="update.php?<?php echo "id=update"; ?>">
+					<input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
 					<div class="modal-body">
 						<!-- Contenu -->
 						<div>
@@ -411,20 +426,26 @@
 						</div>
 						<!-- title -->
 						<div class="input-group mb-3">
-							<input id="title" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="title">
+							<input id="title" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="title2" value="<?php
+																																																echo $title;
+																																																?>">
 						</div>
 						<!-- checks -->
 						<div>
 							<p class="mb-0 fw-bold">Type</p>
 						</div>
 						<div class="form-check ms-2">
-							<input class="form-check-input feature" type="radio" name="flexRadioDefault" id="Feature" value="Feature">
+							<input class="form-check-input feature" type="radio" name="flexRadioDefault2" id="Feature" value="1" <?php if ($type == 1) {
+																																		echo "checked='checked'";
+																																	} ?>>
 							<label class="form-check-label" for="Feature">
 								Feature
 							</label>
 						</div>
 						<div class="form-check mb-2 ms-2">
-							<input class="form-check-input bug" type="radio" name="flexRadioDefault" id="Bug" value="Bug">
+							<input class="form-check-input bug" type="radio" name="flexRadioDefault2" id="Bug" value="2" <?php if ($type == 2) {
+																																echo "checked='checked'";
+																															} ?>>
 							<label class="form-check-label" for="Bug">
 								Bug
 							</label>
@@ -434,40 +455,56 @@
 							<p class="mb-0 fw-bold">Priorety</p>
 						</div>
 						<!-- Priorety -->
-						<select id="Priorety" class="form-select" aria-label="Default select example" name="priorety">
-							<option id="Option" value="1">Low</option>
-							<option id="Option" value="2">Medium</option>
-							<option id="Option" value="3">High</option>
+						<select id="Priorety" class="form-select" aria-label="Default select example" name="priorety2">
+							<option id="Option" value="1" <?php if ($priorety == 1) {
+																echo "selected";
+															} ?>>Low</option>
+							<option id="Option" value="2" <?php if ($priorety == 2) {
+																echo "selected";
+															} ?>>Medium</option>
+							<option id="Option" value="3" <?php if ($priorety == 3) {
+																echo "selected";
+															} ?>>High</option>
 						</select>
 
 						<div>
 							<p class="mb-0 mt-2 fw-bold">Status</p>
 						</div>
-						<select id="Status" class="form-select" aria-label="Default select example" name="status">
-							<option value="1">To do</option>
-							<option value="2">In progress</option>
-							<option value="3">Done</option>
+						<select id="Status" class="form-select" aria-label="Default select example" name="status2">
+							<option value="1" <?php if ($status == 1) {
+													echo "selected";
+												} ?>>To do</option>
+							<option value="2" <?php if ($status == 2) {
+													echo "selected";
+												} ?>>In progress</option>
+							<option value="3" <?php if ($status == 3) {
+													echo "selected";
+												} ?>>Done</option>
 						</select>
 						<!-- date -->
 						<div>
 							<p class="mb-0 mt-2 fw-bold">Date</p>
 						</div>
 						<div class="well ">
-							<input type="date" class="span2  w-100 h-35px m-0" value="02-16-2012" id="dp1" name="date">
+							<input type="date" class="span2  w-100 h-35px m-0" value="<?php
+																						echo $date;
+																						?>" id="dp1" name="date2">
 						</div>
 						<!-- description -->
 						<div>
 							<p class="mb-0 mt-2 fw-bold">Descriptions</p>
 						</div>
 						<div class="mb-3">
-							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description2"><?php
+																															echo $description;
+																															?></textarea>
 						</div>
 
 					</div>
 
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <a href="cancel.php">Cancel</a></button>
 						<button type="submit" class="btn btn-primary" id="saveButton" name="save" data-bs-dismiss="modal">Update</button>
 					</div>
 				</form>
@@ -477,15 +514,20 @@
 
 
 
-
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>
 	<script src="assets/js/javascript.js"></script>
 	<script src="assets/js/script.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<!-- ================== END core-js ================== -->
 
 
 </body>
 
 </html>
+
+<?php
+include 'checkGET.php';
+?>
