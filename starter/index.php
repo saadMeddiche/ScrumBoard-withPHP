@@ -334,7 +334,7 @@
 							<p class="mb-0 fw-bold">Type</p>
 						</div>
 						<div class="form-check ms-2">
-							<input class="form-check-input feature" type="radio" name="flexRadioDefault" id="Feature" value="1">
+							<input class="form-check-input feature" type="radio" name="flexRadioDefault" id="Feature" value="1" checked='checked'>
 							<label class="form-check-label" for="Feature">
 								Feature
 							</label>
@@ -415,7 +415,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Update Task</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<a href="Cancel.php"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
 				</div>
 				<form method="post" action="update.php?<?php echo "id=update"; ?>">
 					<input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
@@ -504,7 +504,7 @@
 
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <a href="cancel.php">Cancel</a></button>
+						<a href="Cancel.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cancel</button></a>
 						<button type="submit" class="btn btn-primary" id="saveButton" name="save" data-bs-dismiss="modal">Update</button>
 					</div>
 				</form>
