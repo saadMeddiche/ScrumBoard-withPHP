@@ -88,7 +88,7 @@
 										<div class="w-100">
 											<div class="fw-bold">' . $row['title'] . '</div>
 											<div class="">
-												<div class="fw-light">#x' . $row['id'] . ' created in ' . $row['date'] . '</div>
+												<div class="fw-light">#' . $row['id'] . ' created in ' . $row['date'] . '</div>
 												<!-- Condition ? true : false https://www.w3schools.com/jsref/jsref_substring.asp  -->
 												<div class="" title="' . $row['description'] . '">' . $row['description'] . '</div>
 											</div>
@@ -178,7 +178,7 @@
 										<div class="w-100">
 											<div class="fw-bold">' . $row['title'] . '</div>
 											<div class="">
-												<div class="fw-light">#x' . $row['id'] . 'created in ' . $row['date'] . '</div>
+												<div class="fw-light">#' . $row['id'] . ' created in ' . $row['date'] . '</div>
 												<!-- Condition ? true : false https://www.w3schools.com/jsref/jsref_substring.asp  -->
 												<div class="" title="' . $row['description'] . '">' . $row['description'] . '</div>
 											</div>
@@ -268,7 +268,7 @@
 										<div class="w-100">
 											<div class="fw-bold">' . $row['title'] . '</div>
 											<div class="">
-												<div class="fw-light">#x' . $row['id'] . 'created in ' . $row['date'] . '</div>
+												<div class="fw-light">#' . $row['id'] . ' created in ' . $row['date'] . '</div>
 												<!-- Condition ? true : false https://www.w3schools.com/jsref/jsref_substring.asp  -->
 												<div class="" title="' . $row['description'] . '">' . $row['description'] . '</div>
 											</div>
@@ -528,8 +528,7 @@
 	<script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>
 	<script src="assets/js/javascript.js"></script>
-	<script src="assets/js/script.js"></script>
-
+	<script src="assets/js/validation.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<!-- ================== END core-js ================== -->
 
