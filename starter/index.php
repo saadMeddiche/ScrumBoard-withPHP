@@ -87,7 +87,7 @@
 										<div class="w-100">
 											<div class="fw-bold">' . $row['title'] . '</div>
 											<div class="">
-												<div class="fw-light">#x created in ' . $row['date'] . '</div>
+												<div class="fw-light">#x' . $row['id'] . ' created in ' . $row['date'] . '</div>
 												<!-- Condition ? true : false https://www.w3schools.com/jsref/jsref_substring.asp  -->
 												<div class="" title="' . $row['description'] . '">' . $row['description'] . '</div>
 											</div>
@@ -110,14 +110,12 @@
 															</i>
 														</button>
 														
-														<a href="index.php?id=' . $row['id'] . '"> <button   href="index.php?id=' . $row['id'] . '"  type="button" class="btn btn-success mb-2" >  Up 
-														</button></a>
+														<a href="index.php?id=' . $row['id'] . '"><button href="index.php?id=' . $row['id'] . '"  type="button" class="btn btn-success mb-2" >  Up </button></a>
 														
 													
 													</div>
-													<div class="">
-														<button   type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
-														<button   type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
+													<div class="ms-5 ps-1">
+														<button type="button" name="moveF" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
 													</div>
 												</div>
 											</div>
@@ -175,7 +173,7 @@
 										<div class="w-100">
 											<div class="fw-bold">' . $row['title'] . '</div>
 											<div class="">
-												<div class="fw-light">#x created in ' . $row['date'] . '</div>
+												<div class="fw-light">#x' . $row['id'] . 'created in ' . $row['date'] . '</div>
 												<!-- Condition ? true : false https://www.w3schools.com/jsref/jsref_substring.asp  -->
 												<div class="" title="' . $row['description'] . '">' . $row['description'] . '</div>
 											</div>
@@ -196,12 +194,13 @@
 																</a>
 															</i>
 														</button>
-														<a href="index.php?id=' . $row['id'] . '"> <button   href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" >  Up 
-														</button></a>
+														<a href="index.php?id=' . $row['id'] . '"><button href="update.php?id=' . $row['id'] . '"  type="button"  class="btn btn-success mb-2" name="editBtn" id="updateBtn" >  Up </button></a>
 													</div>
 													<div class="">
-														<button  onclick="moveTask2(${i})" type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
-														<button  onclick="moveTask(${i})" type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
+														<form method="post" action="Move.php">
+															<button type="submit" name="moveB" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
+															<button type="submit" name="moveF" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
+														</form>
 													</div>
 												</div>
 											</div>
@@ -259,7 +258,7 @@
 										<div class="w-100">
 											<div class="fw-bold">' . $row['title'] . '</div>
 											<div class="">
-												<div class="fw-light">#x created in ' . $row['date'] . '</div>
+												<div class="fw-light">#x' . $row['id'] . 'created in ' . $row['date'] . '</div>
 												<!-- Condition ? true : false https://www.w3schools.com/jsref/jsref_substring.asp  -->
 												<div class="" title="' . $row['description'] . '">' . $row['description'] . '</div>
 											</div>
@@ -284,8 +283,7 @@
 														</button></a>
 													</div>
 													<div class="">
-														<button   type="button" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>
-														<button   type="button" class="btn btn-warning mb-2 " > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path></svg> </i> </button>
+														<button  type="submit" name="moveB" class="btn btn-warning mb-2 me-1" > <i> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z"></path></svg> </i> </button>	
 													</div>
 												</div>
 											</div>
