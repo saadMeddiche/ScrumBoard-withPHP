@@ -68,7 +68,8 @@
 							require "connect.php";
 
 
-							$requete = "SELECT * FROM `dataofthetasks`";
+							$requete = "SELECT dataofthetasks.*, priorety.name , types.nameT FROM `dataofthetasks` INNER JOIN `priorety` JOIN `types` ON dataofthetasks.priorety = priorety.id AND dataofthetasks.type = types.id";
+
 							$query = mysqli_query($connection, $requete);
 							while ($row = mysqli_fetch_assoc($query)) {
 
@@ -93,8 +94,8 @@
 											</div>
 											<div class="d-sm-flex gap-5 mt-2 ">
 												<div class="mb-2">
-													<span type="button" class="btn btn-primary mb-2">' . $row['priorety'] . '</span>
-													<span type="button" class="btn btn-secondary mb-2">' . $row['type'] . '</span>
+													<span type="button" class="btn btn-primary mb-2">' . $row['name'] . '</span>
+													<span type="button" class="btn btn-secondary mb-2">' . $row['nameT'] . '</span>
 												</div>
 												<div class="">
 													<div class="d-flex gap-1">
@@ -160,7 +161,9 @@
 							<?php
 
 							require "connect.php";
-							$requete = "SELECT * FROM `dataofthetasks`";
+
+							$requete = "SELECT dataofthetasks.*, priorety.name , types.nameT FROM `dataofthetasks` INNER JOIN `priorety` JOIN `types` ON dataofthetasks.priorety = priorety.id AND dataofthetasks.type = types.id";
+
 							$query = mysqli_query($connection, $requete);
 							while ($row = mysqli_fetch_assoc($query)) {
 								if ($row['status'] == 2) {
@@ -181,8 +184,8 @@
 											</div>
 											<div class="d-sm-flex gap-5 mt-2 ">
 												<div class="mb-2">
-													<span type="button" class="btn btn-primary mb-2">' . $row['priorety'] . '</span>
-													<span type="button" class="btn btn-secondary mb-2">' . $row['type'] . '</span>
+													<span type="button" class="btn btn-primary mb-2">' . $row['name'] . '</span>
+													<span type="button" class="btn btn-secondary mb-2">' . $row['nameT'] . '</span>
 												</div>
 												<div class="">
 													<div class="">
@@ -247,7 +250,9 @@
 							<?php
 
 							require "connect.php";
-							$$requete = "SELECT * FROM `dataofthetasks`";
+
+							$requete = "SELECT dataofthetasks.*, priorety.name , types.nameT FROM `dataofthetasks` INNER JOIN `priorety` JOIN `types` ON dataofthetasks.priorety = priorety.id AND dataofthetasks.type = types.id";
+
 							$query = mysqli_query($connection, $requete);
 							while ($row = mysqli_fetch_assoc($query)) {
 								if ($row['status'] == 3) {
@@ -269,8 +274,8 @@
 											</div>
 											<div class="d-sm-flex gap-5 mt-2 ">
 												<div class="mb-2">
-													<span type="button" class="btn btn-primary mb-2">' . $row['priorety'] . '</span>
-													<span type="button" class="btn btn-secondary mb-2">' . $row['type'] . '</span>
+													<span type="button" class="btn btn-primary mb-2">' . $row['name'] . '</span>
+													<span type="button" class="btn btn-secondary mb-2">' . $row['nameT'] . '</span>
 												</div>
 												<div class="">
 													<div class="">
