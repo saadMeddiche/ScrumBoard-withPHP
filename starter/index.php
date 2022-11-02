@@ -40,7 +40,7 @@
 				</div>
 
 				<div class="">
-					<button onclick="addTask()" id="addTaskModalExemple" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-info "><i class="">+</i> Add Task</button>
+					<button id="addTaskModalExemple" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-info "><i class="">+</i> Add Task</button>
 				</div>
 			</div>
 
@@ -52,8 +52,11 @@
 
 																										require "connect.php";
 
+																										//Count() function returns the number of rows that matches a specified criterion.
+																										//https://www.w3schools.com/sql/sql_count_avg_sum.asp
 																										$requete = "SELECT COUNT(dataofthetasks.id) FROM dataofthetasks WHERE dataofthetasks.status = 1";
 																										$query = mysqli_query($connection, $requete);
+
 																										//https://stackoverflow.com/questions/6907751/select-count-from-table-of-mysql-in-php
 																										$data = mysqli_fetch_assoc($query);
 																										echo $data['COUNT(dataofthetasks.id)'];
@@ -70,6 +73,8 @@
 
 							$requete = "SELECT dataofthetasks.*, priorety.name , types.nameT FROM `dataofthetasks` INNER JOIN `priorety` JOIN `types` ON dataofthetasks.priorety = priorety.id AND dataofthetasks.type = types.id";
 
+							//How to send this code to the database and run it inside the data base
+							//https://www.youtube.com/watch?v=0YLJ0uO6n8I [5:00]
 							$query = mysqli_query($connection, $requete);
 							while ($row = mysqli_fetch_assoc($query)) {
 
@@ -111,7 +116,7 @@
 															</i>
 														</button>
 														
-														<a href="index.php?id=' . $row['id'] . '"><button href="index.php?id=' . $row['id'] . '"  type="button" class="btn btn-success mb-2" >  Up </button></a>
+														<a href="index.php?id=' . $row['id'] . '"><button type="button" class="btn btn-success mb-2" >  Up </button></a>
 														
 													
 													</div>
@@ -405,10 +410,13 @@
 	<?php
 	require 'connect.php';
 	if (isset($_GET['id'])) {
+
 		$idGlob = $_GET['id'];
 		$requete = "SELECT * FROM dataofthetasks where id='$idGlob'";
+
 		$query = mysqli_query($connection, $requete);
 		$rows = mysqli_fetch_assoc($query);
+
 		$title = $rows['title'];
 		$type = $rows['type'];
 		$priorety = $rows['priorety'];

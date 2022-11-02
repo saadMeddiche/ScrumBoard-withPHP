@@ -14,18 +14,22 @@ include "connect.php";
 
 $lenghtOfTitle = strlen($title);
 
+if (empty($title) || empty($date) || $lenghtOfTitle <= 3) {
 
-//Because the php can't read sql so...
-$requete = "INSERT INTO `dataofthetasks`(`title`, `type`, `priorety`, `status`, `date`, `description`)
+    print_r("Please make sure that the textboxes are not empty or their content are less than 3 letters");
+} else {
+    //Because the php can't read sql so...
+    $requete = "INSERT INTO `dataofthetasks`(`title`, `type`, `priorety`, `status`, `date`, `description`)
     VALUES('$title','$type','$priorety','$status','$date','$description')";
 
-// ... we will use thie function bellow
-$query = mysqli_query($connection, $requete);
+    // ... we will use thie function bellow
+    $query = mysqli_query($connection, $requete);
 
-if (isset($query)) {
-    //return to index.php
-    //Solution for resend the the data
-    header("location:index.php");
-} else {
-    echo 'erreur';
+    if (isset($query)) {
+        //return to index.php
+        //Solution for resend the the data
+        header("location:index.php");
+    } else {
+        echo 'erreur';
+    }
 }
